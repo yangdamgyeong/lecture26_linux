@@ -1,0 +1,18 @@
+#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+	char buf[BUFSIZ];
+	int n;
+
+	n = readlink("linux.sym", buf, BUFSIZ);
+	if(n == -1) {
+		perror("readlink");
+		exit(1);
+	}
+
+	buf[n] = '\0';
+	printf("linux.sym : READLINK = %s\n", buf);
+}
